@@ -15,6 +15,7 @@ class MapView extends Component {
         zoom: 10,
         datos: DB.features
     }
+
     
     componentDidMount() {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -32,6 +33,10 @@ class MapView extends Component {
     render() {
         const position = [this.state.localStart.lat, this.state.localStart.lng]
         console.log(this.state.datos);
+
+
+        
+
         
         return (
         // we usea MAP from react-leaflet with some state properties 
@@ -44,17 +49,19 @@ class MapView extends Component {
             attribution='&copy; Openstreetmap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         
-
-        <GeoJSON         
-            {...this.state.datos.map((dato, index) => (
+        <GeoJSON       
+            {...this.state.datos.map((dato, index) => {
                 // console.log(dato.geometry.coordinates, index)
-                <Marker position={dato.geometry.coordinates}>
-                    <Popup>
-                        A pretty CSS3 popup. <br /> Easily customizable.
-                    </Popup>
-                 </Marker>                
-                
-           ))}
+                const coord = [dato.geometry.coordinates[0], dato.geometry.coordinates[1]]
+                console.log(coord);
+                return (
+                    <Marker
+                        key={index}
+                        position={[coord]}
+                    >
+                    </Marker>
+                )
+            })}
         />        
         
         {this.state.haveUserLocation ?
