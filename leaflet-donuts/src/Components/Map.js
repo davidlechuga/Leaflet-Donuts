@@ -13,7 +13,8 @@ class MapView extends Component {
         },
         haveUserLocation: false,
         zoom: 10,
-        datos: DB.features
+        datos: DB.features,
+        
     }
 
     
@@ -32,11 +33,7 @@ class MapView extends Component {
 
     render() {
         const position = [this.state.localStart.lat, this.state.localStart.lng]
-        console.log(this.state.datos);
-
-
-        
-
+        // console.log(this.state.datos);
         
         return (
         // we usea MAP from react-leaflet with some state properties 
@@ -55,10 +52,8 @@ class MapView extends Component {
                 const coord = [dato.geometry.coordinates[0], dato.geometry.coordinates[1]]
                 console.log(coord);
                 return (
-                    <Marker
-                        key={index}
-                        position={[coord]}
-                    >
+                    <Marker>
+                       
                     </Marker>
                 )
             })}
